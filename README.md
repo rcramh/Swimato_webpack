@@ -1,6 +1,6 @@
 ![image](https://github.com/rcramh/Swimato_webpack/assets/131397354/ef3c5159-b934-4529-b588-cb316cf37e35)
 
-Live app link : [Swimato]([https://github.com/facebook/create-react-app](https://swimato-web.vercel.app/))
+Live app link : [Swimato](https://swimato-web.vercel.app/)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
