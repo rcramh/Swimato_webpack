@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import RestaurantCard, {withPromotedLabel}  from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import swiggy_api_data_in_json from "../utils/Swiggy_api_data_in_json";
+
 
 
 function Home(){
@@ -14,23 +16,27 @@ function Home(){
     const VegRestaurantCard = withPromotedLabel(RestaurantCard);
 
     useEffect(() => {
-        fetchData();
-      }, []);
-    
-    const fetchData = async () => {
-      const data = await fetch(
-        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4107978&lng=78.341552&page_type=DESKTOP_WEB_LISTING"
-      );
-  //cors prefix is added to allow 
-       const json = await data.json();
-
-       setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
        setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      }, []);
 
-      //old swiggy api code
-      //setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-      //data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]?.info?.name
-    };
+    //To fetch live api data , commented here so that if swiggy api changes then no need to maintain code again and again.
+    //-------------------------------------------
+  //   useEffect(() => {
+  //       fetchData();
+  //     }, []);
+    
+  //   const fetchData = async () => {
+  //     const data = await fetch(
+  //       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4107978&lng=78.341552&page_type=DESKTOP_WEB_LISTING"
+  //     );
+  // //cors prefix is added to allow 
+  //      const json = await data.json();
+
+  //      setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+  //      setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+  //   };
+    //-------------------------------------------
 
     const onlineStatus = useOnlineStatus();
 
