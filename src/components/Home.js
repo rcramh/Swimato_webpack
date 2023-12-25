@@ -16,8 +16,8 @@ function Home(){
     const VegRestaurantCard = withPromotedLabel(RestaurantCard);
 
     useEffect(() => {
-        setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-       setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListOfRestaurant(swiggy_api_data_in_json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+       setFilteredRestaurants(swiggy_api_data_in_json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       }, []);
 
     //To fetch live api data , commented here so that if swiggy api changes then no need to maintain code again and again.
