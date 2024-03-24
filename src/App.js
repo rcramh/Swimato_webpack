@@ -1,6 +1,7 @@
 import React, {useState, useEffect , lazy, Suspense} from "react";
 // import ReactDOM from "react-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Error from "./components/Error";
@@ -36,6 +37,7 @@ const AppLayout = () => {
                 <UserContext.Provider value={{userName : "rc cr"}}>
                     <Header/ >
                     <Outlet />
+                    <Footer />
                 </UserContext.Provider >
             </Provider>
         </div>

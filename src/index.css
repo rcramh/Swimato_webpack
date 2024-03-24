@@ -22,11 +22,11 @@ code {
 }
 
 .footer{
-  display: flex;
-  padding : 10px;
-  justify-content: space-between;
-  border: 1px solid black;
-  background-color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 100%;
 }
 
 .logo{
