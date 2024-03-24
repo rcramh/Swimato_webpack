@@ -49,6 +49,11 @@ code {
   justify-content: space-evenly;
 }
 
+.all_card_container::after {
+  content: "";
+  flex: auto;
+}
+
 /* ----------------------------------------------------- */
 
 
