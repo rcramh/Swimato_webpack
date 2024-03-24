@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RestaurantCard, {withPromotedLabel}  from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import swiggy_api_data_in_json from "../utils/Swiggy_api_data_in_json";
 
 
 function Home(){
@@ -14,24 +15,26 @@ function Home(){
     const VegRestaurantCard = withPromotedLabel(RestaurantCard);
 
     useEffect(() => {
-        fetchData();
+      setListOfRestaurant(swiggy_api_data_in_json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setFilteredRestaurants(swiggy_api_data_in_json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       }, []);
     
-    const fetchData = async () => {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4107978&lng=78.341552&page_type=DESKTOP_WEB_LISTING"
-      );
+
+    //swiggy website blocked the api data fetch ,so using loacal json data file that are fetched from api
+    
+    // const fetchData = async () => {
+    //   const data = await fetch(
+    //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4107978&lng=78.341552&page_type=DESKTOP_WEB_LISTING"
+    //   );
   
-       const json = await data.json();
+    //    const json = await data.json();
 
-       setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-       setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    //    setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    //    setFilteredRestaurants(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
-      //old swiggy api code
-      //setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-      //data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]?.info?.name
-    };
+    // };
 
+       
     const onlineStatus = useOnlineStatus();
 
     //console.log(onlineStatus);
@@ -59,29 +62,26 @@ function Home(){
     }
 
     return (listOfRestaurants.length === 0) ? <Shimmer /> :
-    (<div className = "Home">
-        <div className="search">
+    (
+    <>
+      <div className="search-container">
 
-            <div>
-              <input 
-                type="text"
-                className="filter"
-                placeholder="Seach for restaurants" 
-                name="restaurant" 
-                value={searchText}
-                onChange={(event)=> setSearchText(event.target.value)} 
-              />
-              <button onClick={filterRestaurant}><b>Search</b></button>
-            </div>
+      {/* <div> */}
+        <input 
+          type="text"
+          className="search-input"
+          placeholder="Seach for restaurants" 
+          name="restaurant" 
+          value={searchText}
+          onChange={(event)=> setSearchText(event.target.value)} 
+        />
+        <button onClick={filterRestaurant} className="search-button"><b>Search</b></button>
+      {/* </div> */}
 
-            <div>
-                <button onClick={topRatedRestuarants}>Top Rated Restaurants</button>
-            </div>
-        </div>
+     
+      </div>
 
-        
-        
-
+    <div className = "Home">
         {
           filteredRestaurants.map( (restaurantDoc) => (
             <Link 
@@ -98,10 +98,20 @@ function Home(){
           ))
         }
       </div>
+
+      </>
     );
 }
 
 export default Home;
+
+
+
+
+
+
+
+
 
 
 

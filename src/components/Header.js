@@ -24,14 +24,14 @@ function Header(){
     console.log(cartItems);
 
     return (
-        <div class = "navbar">
-            <Link to="/" className="link"><img class = "logo" src={App_logo} alt="swimato_logo"></img></Link>
+        <div className = "navbar">
+            <Link to="/" className="link"><img className = "logo" src={App_logo} alt="swimato_logo"></img></Link>
             <Link to="/" className="link"><h2>Home</h2></Link>
             <Link to="/about" className="link"><h2>About</h2></Link>
             <Link to="/contact" className="link"><h2>Contact</h2></Link>
-            <Link to="/cart" className="link"><h2>Cart ({cartItems.length}) </h2></Link>
+            <Link to="/cart" className="link">  <h2>  Cart [{cartItems.length}] </h2></Link>
             {onlineSatus ? <h2>Online ✅</h2> : <h2>Offline 🔴</h2>}
-            <button onClick={setStatus} >{loginButton}</button>
+            <button onClick={setStatus} className="login-button" >{loginButton}</button>
         </div>
         
     );

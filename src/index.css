@@ -14,8 +14,8 @@ code {
 
 .navbar{
   display: flex;
-  padding : 10px;
   justify-content: space-between;
+  padding : 10px;
   border: 1px solid black;
   background: #50a3a2;
 }
@@ -32,6 +32,12 @@ code {
   width : 50px;
   border-radius: 50%;
 }
+
+.ome {
+  display : inline-flex;
+  flex-wrap: wrap;
+}
+
 
 .card {
   display : inline-grid;
@@ -101,29 +107,101 @@ code {
    color: darkorange;
 }
 
-.search{
+/* ----------------------------------------------------------------*/
+
+/* search CSS */
+
+
+/* .search{
   display : flex;
   flex-wrap: wrap;
   background-color: #faf0f0;
-  padding : 10px;
+  padding : 10px ;
   margin : 10px;
   justify-content: space-between;
   align-items: center;
+} */
+
+
+/* .search{
+  width: 300px; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
 .search input{
   width : 250px;
   height : 28px;
-}
+} */
 
 .search h2{
  text-align: left;
 }
 
 
-.search button{
+/* .search button{
   height : 32px;
+} */
+
+/* Search container */
+.search-container {
+  display: inline-flex;
+  margin: 10px;
 }
+
+/* Search input */
+.search-input {
+  width: 250px; /* Adjust width as needed */
+  padding: 10px;
+  margin : 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px; /* Rounded corners, apply to left side only */
+  font-size: 16px;
+}
+
+/* Search button */
+.search-button {
+  width: 80px; /* Adjust width as needed */
+  padding: 10px;
+  border: none;
+  background-color: #1abc9c; /* Blue color for button background */
+  color: white; /* Text color */
+  border-radius: 5px 5px 5px 5px; /* Rounded corners, apply to right side only */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+
+
+
+/* --------------------------------------------------------------- */
+
+
+.search button {
+  background-color: #007bff; /* Blue color for button background */
+  border: none;
+  color: white; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.search button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
 
 
 .resMenu{
@@ -191,3 +269,108 @@ background-color : #428299;
 border-radius: 5px;
 border: 2px solid #E8E8E8;
 }
+
+
+.login-button {
+  background-color: #3e7d7b; /* Green */
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-weight : bold;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.login-button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+
+
+/* -------------------------------------------------------------------------
+menu css */
+
+  
+  /* Food Container */
+  .food-container {
+    /* background-color: aqua; */
+
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 2px solid rgb(240, 239, 239);
+    
+  }
+  
+  /* Food Details */
+  .food-details {
+    /* background-color: orange; */
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 5px;
+    width: 800px;
+  }
+  
+  .food-name {
+    margin: 0;
+    font-size: 30px;
+    color: #333;
+  }
+  
+  .food-price {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #666;
+  }
+  
+  /* Food Image */
+  .food-image {
+    /* background-color: green; */
+    position: relative;
+    margin: 5px;
+    display: inline-block;
+  }
+  
+  .food-image img {
+    margin: 5px;
+    padding: 5px;
+    max-width: 200px; /* Increase image size */
+    height: auto;
+    border-radius:15px;
+  }
+  
+  /* Add Button */
+  .add-button {
+    position: absolute;
+    bottom: 0; /* Position at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: green;
+    border: none;
+    padding: 5px 10px; /* Adjust button size */
+    border-radius: 5px;
+    font-size: 25px; /* Adjust button font size */
+    cursor: pointer;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .restaurant_menu_header{
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+  }

@@ -33,39 +33,68 @@ function RestaurantMenu(){
       const data = await fetch(
         "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4107978&lng=78.341552&restaurantId=" + resId
       );
-  
+        
        const json = await data.json();
         
        setRestName(json?.data?.cards[0]?.card?.card?.info?.name);
-       setRestDetail(json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
-
+       setRestDetail(json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
     };
-    //json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[9]?.card?.card?.name
-    //console.log(restDetail);
 
+    const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/";     
 
-    return (
-      <div className="resMenu">
-        <h1> {restName} </h1>
-        <h2>Menu</h2>
-        <ul>
+    if(restDetail === undefined || restDetail.length === 0){
+      return (
+        <h2>Loading ...</h2>
+      )
+    }
+
+    return ( 
+      <div >
+        <div className="restaurant_menu_header">
+          <div >
+            <h1> {restName} </h1>
+          </div>
+          </div>
+       
+
         {restDetail.map((item) => (
-          <li key={item.card.info.id}>
-              <div className="dishDetails">
-                {item.card.info.name} -{" Rs."}
-                {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-              </div>
-              <div className="dishAdd">
-                <button onClick = {() => handleAddItem(item)}>
-                  ADD +
-                </button>
-              </div>
-          </li>
+          <div key={item.card.info.id} className="food-container">
+
+            <div className="food-details">
+              <h2 className="food-name">{item.card.info.name}</h2>
+              <p className="food-price">{"Rs "}{  (item.card.info.price / 100 || item.card.info.Price / 100)}</p>
+            </div>
+
+            <div className="food-image">
+              <img src={(item.card.info.imageId === undefined) ? (image + "45900")  : (image + item.card.info.imageId)} alt="Food"/>
+              <button 
+                className="add-button"
+                onClick = {() => handleAddItem(item)}
+              >
+                Add
+              </button>
+            </div>
+
+          </div>
+
         ))}
-      </ul>
 
       </div> 
     );
 }
 
 export default RestaurantMenu;
+
+{/* <div className="dishDetails">
+                {item.card.info.name} -{" Rs."}
+                {item.card.info.price / 100 || item.card.info.Price / 100}
+              </div>
+
+              <div className="dishAdd">
+                <div className="food_image_container">
+                  <img src={image + item.card.info.imageId} alt="food_image" />
+                </div>
+                <button onClick = {() => handleAddItem(item)}>
+                  ADD 
+                </button>
+</div> */}

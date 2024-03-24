@@ -25,7 +25,7 @@ function Cart(){
 
     return (
         <div>
-            {(cartItems.length == 0) ? <div>
+            {(cartItems.length === 0) ? <div>
                 <h3> Please add items into the cart ...</h3>
             </div> :
 
@@ -33,6 +33,12 @@ function Cart(){
                 <div className="clearCart">
                     <button onClick = {() => handleClearCart()}>
                     Clear Cart
+                    </button>
+                </div>
+
+                <div className="clearCart">
+                    <button >
+                    Checkout
                     </button>
                 </div>
             
@@ -51,7 +57,8 @@ function Cart(){
                 </li>
                 ))}
                 </ul>
-
+            
+                
             </div> 
 
             }
