@@ -1,4 +1,5 @@
-![image](https://github.com/rcramh/Swimato_webpack/assets/131397354/ef3c5159-b934-4529-b588-cb316cf37e35)
+![image](https://github.com/rcramh/Swimato_webpack/assets/131397354/1cd945b5-682d-42f0-8477-aac1cc8ad1c8)
+
 
 Live app link : [Swimato](https://swimato-web.vercel.app/)
 # Getting Started with Create React App
