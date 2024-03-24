@@ -81,7 +81,7 @@ function Home(){
      
       </div>
 
-    <div className = "Home">
+    <div className = "all_card_container">
         {
           filteredRestaurants.map( (restaurantDoc) => (
             <Link 

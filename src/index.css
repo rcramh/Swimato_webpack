@@ -13,7 +13,8 @@ code {
 }
 
 .navbar{
-  display: flex;
+  display: inline-flex;
+  width: 100%;
   justify-content: space-between;
   padding : 10px;
   border: 1px solid black;
@@ -37,6 +38,18 @@ code {
   display : inline-flex;
   flex-wrap: wrap;
 }
+
+
+
+/* ----------------------------------------------------- */
+
+.all_card_container{
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* ----------------------------------------------------- */
 
 
 .card {
@@ -109,33 +122,7 @@ code {
 
 /* ----------------------------------------------------------------*/
 
-/* search CSS */
 
-
-/* .search{
-  display : flex;
-  flex-wrap: wrap;
-  background-color: #faf0f0;
-  padding : 10px ;
-  margin : 10px;
-  justify-content: space-between;
-  align-items: center;
-} */
-
-
-/* .search{
-  width: 300px; 
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.search input{
-  width : 250px;
-  height : 28px;
-} */
 
 .search h2{
  text-align: left;
@@ -202,6 +189,7 @@ code {
 }
 
 
+/* --------------------------------------------------------------- */
 
 
 .resMenu{
@@ -274,20 +262,21 @@ border: 2px solid #E8E8E8;
 .login-button {
   background-color: #3e7d7b; /* Green */
   border: none;
-  color: black;
-  padding: 10px 32px;
+  color: white;
+  padding: 10px 36px;
   text-align: center;
   text-decoration: none;
   font-weight : bold;
+  font-size: 20px;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 4px;
+  margin: 4px 20px;
   cursor: pointer;
   border-radius: 8px;
 }
 
 .login-button:hover {
   background-color: #45a049; /* Darker green */
+  color: orange;
 }
 
 
@@ -364,6 +353,8 @@ menu css */
   
   .add-button:hover {
     background-color: #0056b3;
+    color:white;
+
   }
   
 
