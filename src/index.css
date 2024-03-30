@@ -127,38 +127,34 @@ code {
 
 /* ----------------------------------------------------------------*/
 
-
-
 .search h2{
  text-align: left;
 }
 
 
-/* .search button{
-  height : 32px;
-} */
-
 /* Search container */
 .search-container {
-  display: inline-flex;
+  /* display: inline-flex; */
+  display: block;
   margin: 10px;
 }
 
-/* Search input */
 .search-input {
-  width: 250px; /* Adjust width as needed */
+  width: 250px; 
   padding: 10px;
   margin : 1px;
   border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* Rounded corners, apply to left side only */
+  border-radius: 5px 5px 5px 5px; /* Rounded corners, apply to left side only */
   font-size: 16px;
 }
 
-/* Search button */
 .search-button {
   width: 80px; /* Adjust width as needed */
   padding: 10px;
-  border: none;
+  border: 1px solid #ccc;
+  margin : 1px;
+  
+  /* border: none; */
   background-color: #1abc9c; /* Blue color for button background */
   color: white; /* Text color */
   border-radius: 5px 5px 5px 5px; /* Rounded corners, apply to right side only */
