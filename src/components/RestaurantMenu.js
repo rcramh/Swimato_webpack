@@ -35,9 +35,15 @@ function RestaurantMenu(){
       );
         
        const json = await data.json();
+
+       console.log(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+
+      //  data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.name
+      // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.price
+      // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.imageId
         
        setRestName(json?.data?.cards[0]?.card?.card?.info?.name);
-       setRestDetail(json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+       setRestDetail(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
     };
 
     const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/";     
@@ -84,17 +90,3 @@ function RestaurantMenu(){
 }
 
 export default RestaurantMenu;
-
-{/* <div className="dishDetails">
-                {item.card.info.name} -{" Rs."}
-                {item.card.info.price / 100 || item.card.info.Price / 100}
-              </div>
-
-              <div className="dishAdd">
-                <div className="food_image_container">
-                  <img src={image + item.card.info.imageId} alt="food_image" />
-                </div>
-                <button onClick = {() => handleAddItem(item)}>
-                  ADD 
-                </button>
-</div> */}
