@@ -51,7 +51,20 @@ function Home(){
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
       setFilteredRestaurants(searched_rest);
+      setSearchText("");
     }
+
+    // function quickSearch(event){
+
+    //   const input_text = event.target.value ;
+    //   setSearchText(input_text);
+
+    //   const searched_restro = listOfRestaurants.filter((res) =>
+    //             res.info.name.toLowerCase().includes(input_text.toLowerCase())
+    //           );
+    //   setFilteredRestaurants(searched_restro);
+
+    // }
 
     function topRatedRestuarants()
     {
@@ -66,18 +79,16 @@ function Home(){
     <>
       <div className="search-container">
 
-      {/* <div> */}
         <input 
           type="text"
           className="search-input"
           placeholder="Seach for restaurants" 
           name="restaurant" 
           value={searchText}
+          // onChange={(event)=> quickSearch(event)} 
           onChange={(event)=> setSearchText(event.target.value)} 
         />
         <button onClick={filterRestaurant} className="search-button"><b>Search</b></button>
-      {/* </div> */}
-
      
       </div>
 
