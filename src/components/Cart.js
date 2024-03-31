@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 //import UserContext from "../utils/UserContext";
-import { clearCart } from "../utils/cartSlice";
+import { removeItem,clearCart } from "../utils/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -11,17 +11,21 @@ function Cart(){
 
     //subscribing to the part of the store
     const cartItems = useSelector((store) => store.cart.items);
-    console.log(cartItems);
+    // console.log(cartItems);
 
     const dispatch = useDispatch();
 
-    const handleAddItem = () => {
-        
+    //no need remove it, instead add remove item from cart
+    const handleRemoveItem = () => {
+        dispatch(removeItem());
     }
 
     const handleClearCart = () => {
         dispatch(clearCart());
     }
+    
+
+    const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/";
 
     return (
         <div>
@@ -41,22 +45,30 @@ function Cart(){
                     Checkout
                     </button>
                 </div>
-            
-                <ul>
+
                 {cartItems.map((item) => (
-                <li key={item.card.info.id}>
-                    <div className="dishDetails">
-                        {item.card.info.name} -{" Rs."}
-                        {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
+                    <div key={item.card.info.id} className="food-container">
+
+                        <div className="food-details">
+                        <h2 className="food-name">{item.card.info.name}</h2>
+                        <p className="food-price">{"Rs "}{  (item.card.info.price / 100 || item.card.info.Price / 100 || item.card.info.defaultPrice / 100)}</p>
+                        </div>
+
+                        <div className="food-image">
+                            <img src={(item.card.info.imageId === undefined) ? (image + "45900")  : (image + item.card.info.imageId)} alt="Food"/>
+                            <button 
+                            className="add-button"
+                            onClick = {() => handleRemoveItem(item)}
+                            >
+                                Remove
+                            </button>
+                        </div>
+
+
                     </div>
-                    <div className="dishAdd">
-                        <button onClick = {() => handleAddItem(item)}>
-                        ADD +
-                        </button>
-                    </div>
-                </li>
-                ))}
-                </ul>
+
+                    ))
+                }
             
                 
             </div> 
@@ -68,4 +80,3 @@ function Cart(){
 }
 
 export default Cart;
-
