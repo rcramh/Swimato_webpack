@@ -30,7 +30,7 @@ function Cart(){
     return (
         <div>
             {(cartItems.length === 0) ? <div>
-                <h3> Please add items into the cart ...</h3>
+                <h2> Please add items into the cart ...</h2>
             </div> :
 
             <div className="resMenu">

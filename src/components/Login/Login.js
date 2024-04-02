@@ -41,7 +41,7 @@ const Login = () => (
           <div className='signup_parent'>
           
             <div className='signup_container'>
-            <h1>Sign up </h1>
+            <h1 className='sign_up'>Sign up </h1>
 
               <Field name="firstName" className='first_name' placeholder="Name" />
               {errors.firstName && touched.firstName ? (
