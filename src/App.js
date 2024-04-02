@@ -3,7 +3,7 @@ import React, {useState, useEffect , lazy, Suspense} from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";

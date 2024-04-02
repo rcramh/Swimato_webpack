@@ -30,8 +30,12 @@ function Header(){
             <Link to="/about" className="link"><h2>About</h2></Link>
             <Link to="/contact" className="link"><h2>Contact</h2></Link>
             <Link to="/cart" className="link">  <h2>  Cart [{cartItems.length}] </h2></Link>
+            
             {onlineSatus ? <h2>Online ✅</h2> : <h2>Offline 🔴</h2>}
-            <button onClick={setStatus} className="login-button" >{loginButton}</button>
+
+            <Link to="/login" className="link"><h2>Login</h2></Link>
+
+            {/* <button onClick={setStatus} className="login-button" >{loginButton}</button> */}
         </div>
         
     );

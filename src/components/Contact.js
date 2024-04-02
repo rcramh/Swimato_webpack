@@ -13,8 +13,8 @@ function Contact(){
     return (
         <div>
             <h1>Welcome to Contact us page</h1>
-            <h2>loggedin user is {userName}</h2>
-            
+            {/* <h2>loggedin user is {userName}</h2> */}
+
         </div>
     );
 }

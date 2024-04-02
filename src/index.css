@@ -15,10 +15,11 @@ code {
 .navbar{
   display: inline-flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   padding : 10px;
   border: 1px solid black;
   background: #50a3a2;
+  border-radius: 5px;
 }
 
 .footer{
@@ -30,8 +31,10 @@ code {
 }
 
 .logo{
-  width : 50px;
+  width : 60px;
   border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 40px;
 }
 
 .ome {
