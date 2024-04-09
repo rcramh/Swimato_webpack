@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 function RestaurantMenu(){
     const [restName , setRestName] = useState("");
     const [restDetail , setRestDetail] = useState([]);
+
     //get the dynamic resId (route param)
     const { resId } = useParams();
+
     //updating to the slice of the store
     const dispatch = useDispatch();
     const handleAddItem = (item) => {
@@ -20,22 +22,23 @@ function RestaurantMenu(){
     useEffect(() => {
         fetchData();
       }, []);
+
+      console.log(resId)
     
     const fetchData = async () => {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4107978&lng=78.341552&restaurantId=" + resId
-      );
+      // used proxy to resolve cors error, that's why initial swiggy.com is not in endpoint url in below fetch method
+      const data = await fetch("/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4107978&lng=78.341552&restaurantId=" + resId);
         
        const json = await data.json();
        console.log(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
-      //  data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.name
-      // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.price
-      // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards[17].card.info.imageId
-        
+      
        setRestName(json?.data?.cards[0]?.card?.card?.info?.name);
        setRestDetail(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
     };
-    const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/";     
+
+    const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";   //new url
+
+
     if(restDetail === undefined || restDetail.length === 0){
       return (
         <h2>Loading ...</h2>
