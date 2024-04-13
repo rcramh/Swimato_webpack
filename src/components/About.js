@@ -27,7 +27,7 @@ function About(){
     return (
         <div>
             <h1>{userData.name}</h1>
-            <img src={userData.avatar_url} alt="user_photo" />
+            <img style={{"border-radius": "15px", "height":"400px"}}  src={userData.avatar_url} alt="user_photo" />
         </div>
     
 
