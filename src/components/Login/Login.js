@@ -58,6 +58,11 @@ const Login = () => (
             
               <button className='submit_button' type="submit">Submit</button>
 
+              <div className='login_redirect'>
+                <div>Already have an account : </div>
+                <a href=""> login</a>
+              </div>
+
             </div>
           </div>
           
