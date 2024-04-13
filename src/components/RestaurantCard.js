@@ -16,6 +16,7 @@ function RestaurantCard(props){
             <div className="restName"> {name}</div>
             <div className="restRating"> {avgRating}★</div>
             <div className="costForTwo"> RS.{costForTwo} </div>
+            
         </div>
     );
 }

@@ -1,7 +1,6 @@
 {
   "name": "swigc_web",
   "version": "0.1.0",
-  "proxy": "https://www.swiggy.com",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

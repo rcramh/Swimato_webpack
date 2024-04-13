@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import RestaurantCard, {withPromotedLabel}  from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import swiggy_api_data_in_json from "../utils/Swiggy_api_data_in_json";
-
+// import swiggy_api_data_in_json from "../utils/Swiggy_api_data_in_json";
+import swiggy_api_data_in_json from "../utils/HydAndGurgaon";
 
 function Home(){
 

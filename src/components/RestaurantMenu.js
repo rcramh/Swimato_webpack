@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Rest_menu_api_data from "../utils/Rest_menu_api_data";
 
 function RestaurantMenu(){
     const [restName , setRestName] = useState("");
@@ -17,25 +18,33 @@ function RestaurantMenu(){
       // Dispatch an action (sending payload if required)
       dispatch(addItem(item));
     };
-    const cartItems = useSelector((store) => store.cart.items);
-    console.log(cartItems);
+
+
+    console.log(resId)
+
+
     useEffect(() => {
         fetchData();
       }, []);
 
-      console.log(resId)
-    
     const fetchData = async () => {
-      // used proxy to resolve cors error, that's why initial swiggy.com is not in endpoint url in below fetch method
-      const data = await fetch("/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4107978&lng=78.341552&restaurantId=" + resId);
-        
-       const json = await data.json();
-       console.log(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+      //  const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4107978&lng=78.341552&restaurantId=" + resId);
+      //  const json = await data.json();
+      //  console.log(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
       
-       setRestName(json?.data?.cards[0]?.card?.card?.info?.name);
-       setRestDetail(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
-    };
+      //  setRestName(json?.data?.cards[0]?.card?.card?.info?.name);
+      //  setRestDetail(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+                          // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[3].card.card.itemCards[0].card.info.name
 
+        setRestName(Rest_menu_api_data[0]?.data?.cards[0]?.card?.card?.info?.name); 
+        setRestDetail(Rest_menu_api_data[0]?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards);
+                      
+                         
+    };
+    // data.cards[4].groupedCard.cardGroupMap.REGULAR.cards
+    // map over this and start from cards[2], because 0 and 1 will contain unwanted data
+
+   
     const image =  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";   //new url
 
 
