@@ -77,7 +77,7 @@ function RestaurantMenu(){
         </div>
 
         <div className="search-container">
-          <input type="text" placeholder="search for dishes" className="search-input" />
+          <input type="text" placeholder="Search for dishes" className="search-input" />
           <button className="search-button ">Search</button>
         </div>
 
