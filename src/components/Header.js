@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 import App_logo from "../Assets/app_logo.png";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -9,23 +9,29 @@ function Header(){
     const onlineSatus = useOnlineStatus();
 
     const cartItems = useSelector((store) => store.cart.items);
-    console.log(cartItems);
 
     return (
         <div className = "navbar">
             <div className="app_logo">
                 <Link to="/" className="link"><img src={App_logo} alt="swimato_logo"></img></Link>
             </div>
-            <div className="nav_items">
-                <Link to="/" className="link"><h2>Home</h2></Link>
-                <Link to="/about" className="link"><h2>About</h2></Link>
-                {/* <Link to="/contact" className="link"><h2>Contact</h2></Link> */}
-                <Link to="/cart" className="link">  <h2>  Cart [{cartItems.length}] </h2></Link>
-                {onlineSatus ? <h2>Online ✅</h2> : <h2>Offline 🔴</h2>}
+            <div className="nav_items_parent_container">
+                <div className="nav_items">
+                    <div>
+                        <Link to="/" className="link">Home</Link>
+                    </div>
+                    <div>
+                        <Link to="/about" className="link">About</Link>
+                    </div>
+                    <div>
+                        <Link to="/cart" className="link"> Cart [{cartItems.length}] </Link>
+                    </div>
+                    <div> {onlineSatus ? "Online"  : "Offline" } </div>
+                </div>
+                <div className="login_logout">
+                    <Link to="/login" className="link">Sign In</Link>
+                </div>    
             </div>
-            <div className="login_logout">
-                <Link to="/login" className="link"><h2>Sign In</h2></Link>
-            </div>    
         </div>
         
     );

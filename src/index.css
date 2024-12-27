@@ -16,18 +16,20 @@ code {
 /* css for navbar */
 
 .navbar{
+  /* border: 5px solid black; */
   display: inline-flex;
-  width: 100%;
   justify-content: space-between;
-  padding : 10px;
-  /* border: 1px solid black; */
-  /* background: #50a3a2; */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  margin-bottom: 20px;
   border-radius: 5px;
+  font-weight: 800;
 }
 
 .app_logo{
-  border: 1px solid black;
+  /* border: 5px solid black; */
   border-radius: 24px;
   margin-left: 20px;
 }
@@ -39,22 +41,41 @@ code {
   cursor: pointer;
 }
 
-.nav_items{
-  display: inline-flex;
+.nav_items_parent_container{
   width: 50%;
-  justify-content: space-around;
+  display: inline-flex;
+  /* border: 5px solid black; */
+}
+
+.nav_items{
+  width: 50%;
+  margin: 20px;
+  padding: 20px;
+  /* border: 5px solid black; */
+  display: inline-flex;
+  justify-content: space-between;
+  font-weight: 800;
 }
 
 .login_logout{
+  /* border: 5px solid green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 54px;
   margin-right: 50px;
+  margin-top: 12px;
   padding: 0px 40px;
   cursor: pointer;
   border: 1px solid black;
   border-radius: 24px;
+  font-weight: 800;
 }
 
-
-
+.login_logout .link {
+  color: white;
+}
 
 /* ----------------------------------------------------- */
 
