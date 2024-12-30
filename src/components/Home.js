@@ -66,13 +66,20 @@ function Home(){
 
     // }
 
-    function topRatedRestuarants()
-    {
-      const searched_rest = listOfRestaurants.filter((res) =>
-              res.info.avgRating > 4
-              );
-      setFilteredRestaurants(searched_rest);
-    }
+    // it handles search on enter/return button click
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        filterRestaurant();
+      }
+    };
+
+    // function topRatedRestuarants()
+    // {
+    //   const searched_rest = listOfRestaurants.filter((res) =>
+    //           res.info.avgRating > 4
+    //           );
+    //   setFilteredRestaurants(searched_rest);
+    // }
 
     return (listOfRestaurants.length === 0) ? <Shimmer /> :
     (
@@ -85,7 +92,8 @@ function Home(){
           placeholder="Seach for restaurants" 
           name="restaurant" 
           value={searchText}
-          // onChange={(event)=> quickSearch(event)} 
+          // onChange={(event)=> quickSearch(event)}
+          onKeyDown={handleKeyPress}
           onChange={(event)=> setSearchText(event.target.value)} 
         />
         <button onClick={filterRestaurant} className="search-button"><b>Search</b></button>

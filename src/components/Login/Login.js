@@ -60,7 +60,8 @@ const Login = () => (
 
               <div className='login_redirect'>
                 <div>Already have an account : </div>
-                <a href=""> login</a>
+                {/* add code to redirect to the login page */}
+                <a href=""> login</a> 
               </div>
 
             </div>
