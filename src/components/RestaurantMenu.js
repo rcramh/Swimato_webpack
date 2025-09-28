@@ -87,7 +87,7 @@ function RestaurantMenu(){
               <div className="dish_category" onClick={ ( event,index=index1) => handleClick(event, index)}>
                   { (index1>2 && index1<=7) && 
                   <div className="div_category_box">
-                    <div> {category?.card?.card?.title} </div> 
+                    <div> {category?.card?.card?.title} ({category?.card?.card?.itemCards?.length})</div> 
                     <div className="donwArrow" > &#9013; </div>
                   </div>
                   }
