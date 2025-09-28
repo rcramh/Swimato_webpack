@@ -1,4 +1,4 @@
-![image](https://github.com/rcramh/Swimato_webpack/assets/131397354/9e802235-3151-48ae-ab57-3eaede9f2591)
+<img width="720" height="461" alt="image" src="https://github.com/user-attachments/assets/bc31f37e-d53b-40f5-8f55-0ba3426dce7f" />
 
 
 Live app link : [Swimato](https://swimato-web.vercel.app/)
