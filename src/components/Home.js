@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import {useState,useEffect} from "react";
 import { Link } from 'react-router-dom';
 import RestaurantCard, {withPromotedLabel}  from "./RestaurantCard";
 import Shimmer from "./Shimmer";
@@ -89,7 +89,7 @@ function Home(){
         <input 
           type="text"
           className="search-input"
-          placeholder="Seach for restaurants" 
+          placeholder="Seach for restaurant, item or more..." 
           name="restaurant" 
           value={searchText}
           // onChange={(event)=> quickSearch(event)}

@@ -14,7 +14,7 @@ function RestaurantCard(props){
         }
 
         let shortRestName = '';
-        shortRestName += name.substring(0,22);
+        shortRestName += name.substring(0,30);
         shortRestName += '...';
         return shortRestName;
     }
