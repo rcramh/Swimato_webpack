@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
 //import UserContext from "../utils/UserContext";
 import { removeItem,clearCart } from "../utils/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import "./Cart.css"
 
 
 function Cart(){
@@ -34,6 +34,7 @@ function Cart(){
             </div> :
 
             <div className="resMenu">
+            <div className="cart_button_container">
                 <div className="clearCart">
                     <button onClick = {() => handleClearCart()}>
                     Clear Cart
@@ -45,6 +46,8 @@ function Cart(){
                     Checkout
                     </button>
                 </div>
+
+            </div>
 
                 {cartItems.map((item) => (
                     <div key={item.card.info.id} className="food-container">

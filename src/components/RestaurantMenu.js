@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Rest_menu_api_data from "../utils/Rest_menu_api_data";
 
+//Todo : Add count of added items in cart and +, - button around it
 function RestaurantMenu(){
     const [restName , setRestName] = useState("");
     const [restDetail , setRestDetail] = useState([]);
