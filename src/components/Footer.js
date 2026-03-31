@@ -4,11 +4,11 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div>
+        <div className="footer-brand">
           <h3>Swimato</h3>
           <p>Delicious food delivered to your doorstep.</p>
         </div>
-        <div>
+        <div className="footer-links">
           <h4>Quick Links</h4>
           <ul>
             <li><a href="/">Home</a></li>
@@ -16,7 +16,7 @@ function Footer() {
             <li><a href="/about">About</a></li>
           </ul>
         </div>
-        <div>
+        <div className="footer-contact">
           <h4>Contact</h4>
           <p>Email: support@swimato.com</p>
           <p>Phone: +91 12345 67890</p>

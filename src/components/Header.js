@@ -11,9 +11,9 @@ function Header(){
     const cartItems = useSelector((store) => store.cart.items);
 
     return (
-        <div className = "navbar">
+        <div className="navbar">
             <div className="app_logo">
-                <Link to="/" className="link"><img src={App_logo} alt="swimato_logo"></img></Link>
+                <Link to="/" className="logo_link"><img src={App_logo} alt="swimato_logo"></img></Link>
             </div>
             <div className="nav_items_parent_container">
                 <div className="nav_items">
@@ -24,9 +24,12 @@ function Header(){
                         <Link to="/about" className="link">About</Link>
                     </div>
                     <div>
-                        <Link to="/cart" className="link"> Cart [{cartItems.length}] </Link>
+                        <Link to="/cart" className="link">Cart [{cartItems.length}]</Link>
                     </div>
-                    <div> {onlineSatus ? "Online"  : "Offline" } </div>
+                    <div className="online_status"> 
+                        <div className={`status_dot ${onlineSatus ? "online" : ""}`}></div>
+                        {onlineSatus ? "Online"  : "Offline" } 
+                    </div>
                 </div>
                 <div className="login_logout">
                     <Link to="/login" className="link">Sign In</Link>
