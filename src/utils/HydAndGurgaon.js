@@ -1,4 +1,3 @@
-import React from "react";
 
 const swiggy_api_data_in_json = 
 {

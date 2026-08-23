@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import './login.css';
@@ -61,7 +62,7 @@ const Login = () => (
               <div className='login_redirect'>
                 <div>Already have an account : </div>
                 {/* add code to redirect to the login page */}
-                <a href=""> login</a> 
+                <Link to="/login"> login</Link> 
               </div>
 
             </div>
