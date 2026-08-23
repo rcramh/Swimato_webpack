@@ -14,7 +14,6 @@ import { createBrowserRouter, Outlet} from "react-router-dom";
 
 //Lazy loading : On demand loading of the components
 const About = lazy( () => import("./components/About.js") );
-const Contact = lazy( () => import("./components/Contact.js") );
 const Cart = lazy( () => import("./components/Cart.js") );
 
 
@@ -58,10 +57,6 @@ const router = createBrowserRouter(
                 {
                     path : "/about",
                     element : (<Suspense fallback={<h1>Loading...</h1>} > <About /> </Suspense>),
-                },
-                {
-                    path : "/contact",
-                    element : (<Suspense fallback={<h1>Loading...</h1>} > <Contact /></Suspense>),
                 },
                 {
                     path : "/cart",

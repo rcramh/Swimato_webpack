@@ -1,0 +1,76 @@
+/* Skeleton placeholders that mirror the restaurant card's shape so the
+   layout does not jump when real data arrives. */
+
+.shimmer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  list-style: none;
+}
+
+.shimmer-card {
+  border: 1px solid #ececec;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+}
+
+.shimmer-media {
+  aspect-ratio: 16 / 10;
+}
+
+.shimmer-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.shimmer-line {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.shimmer-line.w-80 {
+  width: 80%;
+}
+.shimmer-line.w-60 {
+  width: 60%;
+}
+.shimmer-line.w-40 {
+  width: 40%;
+}
+
+.shimmer-media,
+.shimmer-line {
+  background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: shimmer-sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .shimmer-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-media,
+  .shimmer-line {
+    animation: none;
+  }
+}
