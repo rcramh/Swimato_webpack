@@ -1,4 +1,6 @@
-<img width="720" height="461" alt="image" src="https://github.com/user-attachments/assets/bc31f37e-d53b-40f5-8f55-0ba3426dce7f" />
+
+<img width="1358" height="958" alt="image" src="https://github.com/user-attachments/assets/b54a2e9e-22d1-4d1f-811c-766fd8ecb11e" />
+
 
 
 Live app link : [Swimato](https://swimato-web.vercel.app/)
