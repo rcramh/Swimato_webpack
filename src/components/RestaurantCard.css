@@ -79,8 +79,10 @@
 /* the little square veg mark */
 .res-card-veg::before {
   content: "";
-  width: 10px;
-  height: 10px;
+  /* 13px: under border-box the 1.5px border eats into the box, so the
+     square keeps the size it had before the reset */
+  width: 13px;
+  height: 13px;
   border: 1.5px solid currentColor;
   border-radius: 2px;
   background:

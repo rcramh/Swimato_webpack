@@ -1,4 +1,24 @@
 /* ---------------------------------------------------------------
+   Reset
+
+   border-box everywhere: padding and borders count inside a declared
+   width, so a 100%-wide button inside a padded card stays inside it.
+----------------------------------------------------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* nothing should be able to push the page sideways */
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------------------
    Design tokens. Every component reads from these, so the header,
    footer and page surfaces stay in step.
 ----------------------------------------------------------------*/
@@ -57,123 +77,104 @@ code {
 /* restaurant cards  -> components/RestaurantCard.css */
 /* home + search     -> components/Home.css */
 /* loading skeleton  -> components/Shimmer.css */
+/* restaurant menu  -> components/RestaurantMenu.css */
+/* cart page        -> components/Cart.css */
 
-/* ----------------------------------------------------------------*/
+/* ---------------------------------------------------------------
+   Shared primitives
 
-/* --------------------------------------------------------------- */
-/*  cart list (Cart.js) */
+   These two show up on more than one page (the menu lists dishes,
+   the cart lists the same dishes again), so they live here rather
+   than in either component's stylesheet.
+----------------------------------------------------------------*/
 
-.resMenu{
-text-align : center;
+/* ---------------------------------- veg / non-veg mark */
+
+.veg-mark {
+  /* inline-grid, not inline: a bare span ignores width/height and collapses
+     to its own side borders, which renders as a thin vertical line */
+  display: inline-grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  border: 1.5px solid #2e7d32;
+  border-radius: 3px;
 }
 
-.resMenu ul{
-display: inline-block;
-flex-direction: column;
-}
-.resMenu li{
-  list-style-type: none;
-  display : inline-flex;
-  justify-content : space-between;
-  width : 450px;
-  height : 60px;
-  padding : 10px;
-  margin : 10px;
-  border : 5px;
-  box-shadow: 10px 10px 5px 0px rgba(122,117,116,0.75);
-  text-align : left;
-  font-size: 22px;
+/* solid inner dot, crisper than a radial-gradient at this size */
+.veg-mark::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2e7d32;
 }
 
-.clearCart{
-width : 90px;
-height : 60px;
-padding : 5px;
-margin : 5px;
+.veg-mark.is-nonveg {
+  border-color: #a33d2f;
 }
 
-.clearCart button{
-color: white;
-font : 13px;
-width : 120px;
-height : 38px;
-font-size: 18px;
-background-color : #428299;
-border-radius: 5px;
-border: 2px solid #E8E8E8;
+.veg-mark.is-nonveg::before {
+  background: #a33d2f;
 }
 
-/* -------------------------------------------------------------------------
-/* Restuarant menu css : may be not used, remove it */
+/* ---------------------------------- quantity stepper */
 
-  /* Food Container */
-  .food-container {
-    width: 100%;
-    display: inline-flex;
-    justify-content: center;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    border-bottom: 1px solid rgb(240, 239, 239);
-    
-  }
-  
-  .food-details {
-    /* background-color: orange; */
-    margin-top: 20px;
-    margin-left: 20px;
-    padding: 5px;
-    width: 800px;
-  }
-  
-  .food-name {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .food-price {
-    margin: 5px 0;
-    font-size: 18px;
-    color: #666;
-  }
-  
-  /* Food Image */
-  .food-image {
-    /* background-color: green; */
-    position: relative;
-    margin: 5px;
-    display: inline-block;
-  }
-  
-  .food-image img {
-    margin: 5px;
-    padding: 5px;
-    max-width: 200px; /* Increase image size */
-    height: auto;
-    border-radius:15px;
-  }
-  
-  /* Add Button */
-  .add-button {
-    position: absolute;
-    bottom: 0; /* Position at the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    color: green;
-    border: none;
-    padding: 5px 10px; /* Adjust button size */
-    border-radius: 5px;
-    font-size: 22px; /* Adjust button font size */
-    cursor: pointer;
-  }
-  
-  .add-button:hover {
-    background-color: #0056b3;
-    color:white;
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  overflow: hidden;
+}
 
-  }
-  
+.qty-stepper button {
+  width: 34px;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--brand);
+  cursor: pointer;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease;
+}
 
-  
+.qty-stepper button:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+.qty-stepper button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+.qty-value {
+  min-width: 30px;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qty-stepper button {
+    transition: none;
+  }
+}

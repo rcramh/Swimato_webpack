@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../utils/cartSlice";
+import { addItem, removeItem, selectCartItems } from "../utils/cartSlice";
 import Rest_menu_api_data from "../utils/Rest_menu_api_data";
 import listing from "../utils/HydAndGurgaon";
 import "./RestaurantMenu.css";
@@ -54,7 +54,7 @@ const rupees = (paise) => Math.round(paise / 100);
 function RestaurantMenu() {
   const { resId } = useParams();
   const dispatch = useDispatch();
-  const cartItems = useSelector((store) => store.cart.items);
+  const cartItems = useSelector(selectCartItems);
 
   const [query, setQuery] = useState("");
   const [vegOnly, setVegOnly] = useState(false);
@@ -98,8 +98,16 @@ function RestaurantMenu() {
     0,
   );
 
-  const quantityInCart = (itemId) =>
-    cartItems.filter((entry) => entry?.card?.info?.id === itemId).length;
+  // id -> quantity, so each dish can show its own count without walking
+  // the cart once per row
+  const quantities = useMemo(
+    () =>
+      cartItems.reduce((map, entry) => {
+        map[entry.id] = entry.quantity;
+        return map;
+      }, {}),
+    [cartItems],
+  );
 
   const toggleCategory = (categoryId) =>
     setOpenCategories((current) => {
@@ -279,7 +287,7 @@ function RestaurantMenu() {
                 {isOpen && (
                   <ul className="menu-items">
                     {category.items.map((item) => {
-                      const inCart = quantityInCart(item.id);
+                      const inCart = quantities[String(item.id)] ?? 0;
 
                       return (
                         <li className="menu-item" key={item.id}>
@@ -308,16 +316,35 @@ function RestaurantMenu() {
                               alt=""
                               loading="lazy"
                             />
-                            <button
-                              type="button"
-                              className="menu-add"
-                              onClick={() =>
-                                // keep the shape Cart.js already reads
-                                dispatch(addItem({ card: { info: item.raw } }))
-                              }
-                            >
-                              {inCart > 0 ? `Added ${inCart}` : "Add"}
-                            </button>
+                            {inCart > 0 ? (
+                              <div className="qty-stepper menu-qty">
+                                <button
+                                  type="button"
+                                  onClick={() => dispatch(removeItem(item.id))}
+                                  aria-label={`Remove one ${item.name}`}
+                                >
+                                  &minus;
+                                </button>
+                                <span className="qty-value" aria-live="polite">
+                                  {inCart}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => dispatch(addItem(item))}
+                                  aria-label={`Add one more ${item.name}`}
+                                >
+                                  +
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                type="button"
+                                className="menu-add"
+                                onClick={() => dispatch(addItem(item))}
+                              >
+                                Add
+                              </button>
+                            )}
                           </div>
                         </li>
                       );

@@ -324,38 +324,6 @@
   white-space: nowrap;
 }
 
-/* ---------------------------------- veg / non-veg mark */
-
-.veg-mark {
-  /* inline-grid, not inline: a bare span ignores width/height and collapses
-     to its own side borders, which renders as a thin vertical line */
-  display: inline-grid;
-  place-items: center;
-  box-sizing: border-box;
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  border: 1.5px solid #2e7d32;
-  border-radius: 3px;
-}
-
-/* solid inner dot, crisper than a radial-gradient at this size */
-.veg-mark::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #2e7d32;
-}
-
-.veg-mark.is-nonveg {
-  border-color: #a33d2f;
-}
-
-.veg-mark.is-nonveg::before {
-  background: #a33d2f;
-}
-
 /* ---------------------------------- categories */
 
 .menu-list {
@@ -398,8 +366,9 @@
 }
 
 .menu-chevron {
-  width: 9px;
-  height: 9px;
+  /* 11px so the 2px borders sit inside without shrinking the arrow */
+  width: 11px;
+  height: 11px;
   flex-shrink: 0;
   border-right: 2px solid var(--muted);
   border-bottom: 2px solid var(--muted);
@@ -521,6 +490,21 @@
   background: var(--brand);
   border-color: var(--brand);
   color: #fff;
+}
+
+/* the stepper replaces the Add button in place, so it keeps the same
+   footprint at the bottom of the dish image */
+.menu-qty {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 92px;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.12);
+}
+
+.menu-qty .qty-value {
+  flex: 1;
 }
 
 /* ---------------------------------- empty state */

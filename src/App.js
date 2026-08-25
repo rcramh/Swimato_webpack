@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Login from "./components/Login/Login";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Checkout from "./components/Checkout";
 import UserContext from "./utils/UserContext";
 import appStore from "./utils/appStore";
 import {Provider} from "react-redux";
@@ -61,6 +62,10 @@ const router = createBrowserRouter(
                 {
                     path : "/cart",
                     element : (<Suspense fallback={<h1>Loading...</h1>} > <Cart /></Suspense>),
+                },
+                {
+                    path : "/checkout",
+                    element : <Checkout />,
                 },
                 {
                     path : "/login",

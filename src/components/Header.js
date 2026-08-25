@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import App_logo from "../Assets/app_logo.png";
+import { selectCartCount } from "../utils/cartSlice";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import "./Header.css";
 
@@ -15,8 +16,8 @@ const navLinkClass = ({ isActive }) =>
 
 function Header() {
   const isOnline = useOnlineStatus();
-  const cartItems = useSelector((store) => store.cart.items);
-  const cartCount = cartItems.length;
+  // total dishes, so adding the same item twice moves the badge to 2
+  const cartCount = useSelector(selectCartCount);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
