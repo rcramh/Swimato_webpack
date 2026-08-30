@@ -4,9 +4,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login/Login";
+import Signup from "./components/Login/Signup";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Checkout from "./components/Checkout";
+import RouteTransition from "./components/RouteTransition";
+import { PageShimmer } from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import appStore from "./utils/appStore";
 import {Provider} from "react-redux";
@@ -36,7 +39,9 @@ const AppLayout = () => {
             <Provider store = {appStore}>
                 <UserContext.Provider value={{ userName }}>
                     <Header/ >
-                    <Outlet />
+                    <RouteTransition>
+                        <Outlet />
+                    </RouteTransition>
                     <Footer />
                 </UserContext.Provider >
             </Provider>
@@ -57,11 +62,11 @@ const router = createBrowserRouter(
                 },
                 {
                     path : "/about",
-                    element : (<Suspense fallback={<h1>Loading...</h1>} > <About /> </Suspense>),
+                    element : (<Suspense fallback={<PageShimmer />} > <About /> </Suspense>),
                 },
                 {
                     path : "/cart",
-                    element : (<Suspense fallback={<h1>Loading...</h1>} > <Cart /></Suspense>),
+                    element : (<Suspense fallback={<PageShimmer />} > <Cart /></Suspense>),
                 },
                 {
                     path : "/checkout",
@@ -70,6 +75,10 @@ const router = createBrowserRouter(
                 {
                     path : "/login",
                     element : <Login />,
+                },
+                {
+                    path : "/signup",
+                    element : <Signup />,
                 },
                 {
                     path : "/restaurants/:resId",

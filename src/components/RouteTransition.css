@@ -1,0 +1,29 @@
+/* Page-to-page transition. See RouteTransition.js for why the animation
+   targets the children instead of the wrapper. */
+
+.route-view {
+  /* Holds the page tall enough that the footer does not slide up and settle
+     while a short page (or a shimmer) is on screen. */
+  min-height: 72vh;
+}
+
+.route-view > * {
+  animation: route-enter 260ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-view > * {
+    animation: none;
+  }
+}

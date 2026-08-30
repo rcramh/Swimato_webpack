@@ -109,9 +109,14 @@
     border-color 0.16s ease;
 }
 
-.auth-submit:hover {
+.auth-submit:hover:not(:disabled) {
   background: var(--brand-dark);
   border-color: var(--brand-dark);
+}
+
+.auth-submit:disabled {
+  opacity: 0.65;
+  cursor: default;
 }
 
 .auth-foot {

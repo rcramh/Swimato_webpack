@@ -20,4 +20,21 @@ function Shimmer() {
   );
 }
 
+// Stand-in for a whole route while its lazy chunk downloads. Kept generic so
+// any page can use it as a Suspense fallback.
+export function PageShimmer() {
+  return (
+    <div className="page-shimmer" aria-hidden="true">
+      <div className="page-shimmer-hero">
+        <div className="shimmer-block sk-mark" />
+        <div className="shimmer-line sk-title" />
+        <div className="shimmer-line sk-lede" />
+        <div className="shimmer-line sk-lede short" />
+      </div>
+      <div className="shimmer-block sk-panel" />
+      <div className="shimmer-block sk-panel" />
+    </div>
+  );
+}
+
 export default Shimmer;

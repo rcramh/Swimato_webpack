@@ -1,91 +1,103 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import "./login.css";
 
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-
+// Deliberately looser than SignupSchema: an existing password only has to be
+// present. Re-running the strength rules here would reject accounts made
+// before those rules existed, and tells an attacker what the format is.
+const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
-
-  password: Yup.string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters long")
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number",
-    ),
+  password: Yup.string().required("Password is required"),
 });
 
 const FIELDS = [
-  { name: "firstName", label: "Name", type: "text", placeholder: "Your name" },
-  { name: "email", label: "Email", type: "email", placeholder: "you@example.com" },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "you@example.com",
+    autoComplete: "email",
+  },
   {
     name: "password",
     label: "Password",
     type: "password",
-    placeholder: "At least 8 characters",
+    placeholder: "Your password",
+    autoComplete: "current-password",
   },
 ];
 
-const Login = () => (
-  <div className="auth">
-    <Formik
-      initialValues={{ firstName: "", email: "", password: "" }}
-      validationSchema={SignupSchema}
-      onSubmit={(values) => {
-        // same shape as initial values
-        console.log(values);
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form className="auth-card" noValidate>
-          <h1 className="auth-title">Sign up</h1>
-          <p className="auth-sub">
-            Create an account to order faster and keep track of your cart.
-          </p>
+const Login = () => {
+  const navigate = useNavigate();
 
-          {FIELDS.map(({ name, label, type, placeholder }) => {
-            const showError = errors[name] && touched[name];
+  // No backend yet, so this stands in for the round trip: hold the button in
+  // its pending state, then drop the user back on the listing.
+  const handleSubmit = async (values, { setSubmitting }) => {
+    console.log("Sign in requested for", values.email);
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    setSubmitting(false);
+    navigate("/");
+  };
 
-            return (
-              <div className="auth-field" key={name}>
-                <label className="auth-label" htmlFor={name}>
-                  {label}
-                </label>
-                <Field
-                  id={name}
-                  name={name}
-                  type={type}
-                  placeholder={placeholder}
-                  className={`auth-input ${showError ? "is-invalid" : ""}`}
-                  aria-invalid={Boolean(showError)}
-                  aria-describedby={showError ? `${name}-error` : undefined}
-                />
-                {showError && (
-                  <p className="auth-error" id={`${name}-error`} role="alert">
-                    {errors[name]}
-                  </p>
-                )}
-              </div>
-            );
-          })}
+  return (
+    <div className="auth">
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={LoginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, isSubmitting }) => (
+          <Form className="auth-card" noValidate>
+            <h1 className="auth-title">Log in</h1>
+            <p className="auth-sub">
+              Welcome back. Sign in to pick up where you left off.
+            </p>
 
-          <button className="auth-submit" type="submit">
-            Create account
-          </button>
+            {FIELDS.map(({ name, label, type, placeholder, autoComplete }) => {
+              const showError = errors[name] && touched[name];
 
-          <p className="auth-foot">
-            Already have an account? <Link to="/login">Log in</Link>
-          </p>
-        </Form>
-      )}
-    </Formik>
-  </div>
-);
+              return (
+                <div className="auth-field" key={name}>
+                  <label className="auth-label" htmlFor={name}>
+                    {label}
+                  </label>
+                  <Field
+                    id={name}
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    autoComplete={autoComplete}
+                    className={`auth-input ${showError ? "is-invalid" : ""}`}
+                    aria-invalid={Boolean(showError)}
+                    aria-describedby={showError ? `${name}-error` : undefined}
+                  />
+                  {showError && (
+                    <p className="auth-error" id={`${name}-error`} role="alert">
+                      {errors[name]}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+
+            <button
+              className="auth-submit"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Signing in…" : "Log in"}
+            </button>
+
+            <p className="auth-foot">
+              New here? <Link to="/signup">Create an account</Link>
+            </p>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+};
 
 export default Login;
