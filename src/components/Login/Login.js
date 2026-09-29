@@ -1,102 +1,91 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import "./login.css";
+import { useLoginMutation } from "../../utils/authApi";
+import { readApiError } from "../../utils/apiSlice";
+import { selectCurrentUser } from "../../utils/authSlice";
+import AuthLayout from "./AuthLayout";
+import { FormAlert, PasswordField, SubmitButton, TextField } from "./AuthFields";
 
 // Deliberately looser than SignupSchema: an existing password only has to be
 // present. Re-running the strength rules here would reject accounts made
 // before those rules existed, and tells an attacker what the format is.
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().trim().email("Enter a valid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
 
-const FIELDS = [
-  {
-    name: "email",
-    label: "Email",
-    type: "email",
-    placeholder: "you@example.com",
-    autoComplete: "email",
-  },
-  {
-    name: "password",
-    label: "Password",
-    type: "password",
-    placeholder: "Your password",
-    autoComplete: "current-password",
-  },
-];
-
 const Login = () => {
-  const navigate = useNavigate();
+  const [login] = useLoginMutation();
+  const user = useSelector(selectCurrentUser);
+  const location = useLocation();
 
-  // No backend yet, so this stands in for the round trip: hold the button in
-  // its pending state, then drop the user back on the listing.
-  const handleSubmit = async (values, { setSubmitting }) => {
-    console.log("Sign in requested for", values.email);
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setSubmitting(false);
-    navigate("/");
+  // RequireAuth sends people here with the page they were trying to reach.
+  const returnTo = location.state?.from?.pathname ?? "/";
+
+  // The fulfilled login lands the user in authSlice, which re-renders this
+  // page into a redirect — so there is no navigate() in the submit handler.
+  if (user) return <Navigate to={returnTo} replace />;
+
+  const handleSubmit = async (values, { setErrors, setStatus }) => {
+    setStatus(undefined);
+    try {
+      await login({ email: values.email.trim(), password: values.password }).unwrap();
+    } catch (error) {
+      const { message, fieldErrors } = readApiError(error);
+      setErrors(fieldErrors);
+      setStatus(message);
+    }
   };
 
   return (
-    <div className="auth">
+    <AuthLayout
+      title="Welcome back"
+      subtitle="Log in to pick up where you left off."
+      footer={
+        <>
+          New to Swimato?{" "}
+          <Link to="/signup" state={location.state}>
+            Create an account
+          </Link>
+        </>
+      }
+    >
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isSubmitting }) => (
-          <Form className="auth-card" noValidate>
-            <h1 className="auth-title">Log in</h1>
-            <p className="auth-sub">
-              Welcome back. Sign in to pick up where you left off.
-            </p>
+        {({ isSubmitting, status }) => (
+          <Form noValidate>
+            <FormAlert message={status} />
 
-            {FIELDS.map(({ name, label, type, placeholder, autoComplete }) => {
-              const showError = errors[name] && touched[name];
+            <TextField
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              autoFocus
+            />
+            <PasswordField
+              label="Password"
+              name="password"
+              placeholder="Your password"
+              autoComplete="current-password"
+            />
 
-              return (
-                <div className="auth-field" key={name}>
-                  <label className="auth-label" htmlFor={name}>
-                    {label}
-                  </label>
-                  <Field
-                    id={name}
-                    name={name}
-                    type={type}
-                    placeholder={placeholder}
-                    autoComplete={autoComplete}
-                    className={`auth-input ${showError ? "is-invalid" : ""}`}
-                    aria-invalid={Boolean(showError)}
-                    aria-describedby={showError ? `${name}-error` : undefined}
-                  />
-                  {showError && (
-                    <p className="auth-error" id={`${name}-error`} role="alert">
-                      {errors[name]}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-
-            <button
-              className="auth-submit"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Signing in…" : "Log in"}
-            </button>
-
-            <p className="auth-foot">
-              New here? <Link to="/signup">Create an account</Link>
-            </p>
+            <SubmitButton
+              isSubmitting={isSubmitting}
+              idleLabel="Log in"
+              busyLabel="Logging in…"
+            />
           </Form>
         )}
       </Formik>
-    </div>
+    </AuthLayout>
   );
 };
 

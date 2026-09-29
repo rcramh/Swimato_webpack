@@ -3,6 +3,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import App_logo from "../Assets/app_logo.png";
 import { selectCartCount } from "../utils/cartSlice";
+import { selectAuthStatus, selectCurrentUser } from "../utils/authSlice";
+import { useLogoutMutation } from "../utils/authApi";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import "./Header.css";
 
@@ -18,6 +20,9 @@ function Header() {
   const isOnline = useOnlineStatus();
   // total dishes, so adding the same item twice moves the badge to 2
   const cartCount = useSelector(selectCartCount);
+  const user = useSelector(selectCurrentUser);
+  const authStatus = useSelector(selectAuthStatus);
+  const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
@@ -98,9 +103,28 @@ function Header() {
                 Offline
               </span>
             )}
-            <Link to="/login" className="btn-signin">
-              Sign in
-            </Link>
+            {/* Nothing until the startup session check settles, so a
+                signed-in user never sees "Sign in" flash first. */}
+            {authStatus === "authenticated" && (
+              <>
+                <span className="nav-user" title={user.email}>
+                  Hi, {user.name.split(" ")[0]}
+                </span>
+                <button
+                  type="button"
+                  className="btn-signin"
+                  onClick={() => logout()}
+                  disabled={isLoggingOut}
+                >
+                  {isLoggingOut ? "Logging out…" : "Log out"}
+                </button>
+              </>
+            )}
+            {authStatus === "anonymous" && (
+              <Link to="/login" className="btn-signin">
+                Sign in
+              </Link>
+            )}
           </div>
         </nav>
       </div>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect , lazy, Suspense} from "react";
+import React, {lazy, Suspense} from "react";
 // import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -9,10 +9,8 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Checkout from "./components/Checkout";
 import RouteTransition from "./components/RouteTransition";
+import RequireAuth from "./components/RequireAuth";
 import { PageShimmer } from "./components/Shimmer";
-import UserContext from "./utils/UserContext";
-import appStore from "./utils/appStore";
-import {Provider} from "react-redux";
 
 import { createBrowserRouter, Outlet} from "react-router-dom";
 
@@ -21,30 +19,16 @@ const About = lazy( () => import("./components/About.js") );
 const Cart = lazy( () => import("./components/Cart.js") );
 
 
+// The Redux Provider sits in index.js, above the router, and the signed-in
+// user comes from the auth slice (restored from the session on startup).
 const AppLayout = () => {
-
-    const [userName,setUserName] = useState("");
-
-    //For Authentication
-    useEffect(()=>{
-    //Make an API call to send userName and password
-        const data = {
-        name : "Rahul Chaubey",
-        };
-        setUserName(data.name);
-    },[]);
-
     return (
         <div>
-            <Provider store = {appStore}>
-                <UserContext.Provider value={{ userName }}>
-                    <Header/ >
-                    <RouteTransition>
-                        <Outlet />
-                    </RouteTransition>
-                    <Footer />
-                </UserContext.Provider >
-            </Provider>
+            <Header/ >
+            <RouteTransition>
+                <Outlet />
+            </RouteTransition>
+            <Footer />
         </div>
     );
 }
@@ -70,7 +54,7 @@ const router = createBrowserRouter(
                 },
                 {
                     path : "/checkout",
-                    element : <Checkout />,
+                    element : (<RequireAuth> <Checkout /> </RequireAuth>),
                 },
                 {
                     path : "/login",
