@@ -549,6 +549,79 @@
   color: var(--brand);
 }
 
+.menu-btn.is-primary {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: #fff;
+  cursor: pointer;
+}
+
+.menu-btn.is-primary:hover:not(:disabled) {
+  border-color: var(--brand-dark);
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+.menu-btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* ---------------------------------- loading + error */
+
+.menu-skeleton {
+  margin-top: 24px;
+}
+
+.menu-skeleton-toolbar {
+  height: 44px;
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+}
+
+.menu-skeleton-category {
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+}
+
+.menu-skeleton-title {
+  width: 40%;
+  height: 18px;
+  margin-bottom: 18px;
+}
+
+.menu-skeleton-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 0;
+}
+
+.menu-skeleton-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-skeleton-img {
+  flex: none;
+  width: 136px;
+  height: 112px;
+  border-radius: var(--radius);
+}
+
+.menu-error h2 {
+  color: #a33d2f;
+}
+
+@media (max-width: 520px) {
+  .menu-skeleton-img {
+    width: 104px;
+    height: 92px;
+  }
+}
+
 /* ---------------------------------- focus + motion */
 
 .menu :is(button, input, a):focus-visible {
